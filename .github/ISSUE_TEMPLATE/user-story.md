@@ -10,10 +10,22 @@ assignees: ''
 **As a** [role]
 **I need** [function]
 **So that** [benefit]
-### Details and Assumptions
-    * [document what you know]
-### Acceptance Criteria
-    gherkin
-    Given [some context]
-    When [certain action is taken]
-    Then [the outcome of action is observed]
+
+## Details and Assumptions
+
+- [Add relevant project/business details]
+- [Add technical or functional assumptions if necessary]
+- [Add constraints or dependencies]
+
+## Acceptance Criteria
+
+- [ ] [Specific condition that must be satisfied]
+- [ ] [Specific condition that must be satisfied]
+- [ ] [Specific condition that must be satisfied]
+
+## Definition of Done
+
+- [ ] All acceptance criteria are satisfied.
+- [ ] Feature has been tested successfully.
+- [ ] No known critical errors remain.
+- [ ] Code/documentation has been committed and pushed to GitHub.
