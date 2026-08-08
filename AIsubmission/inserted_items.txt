@@ -1,0 +1,8 @@
+C:\Users\Ahmed Rizwan\Final_Capstone_Project\giftlink-backend\util\import-mongo> npm start
+
+> import-mongo@1.0.0 start
+> node index.js
+
+Connected successfully to server
+Inserted documents: 16
+PS C:\Users\Ahmed Rizwan\Final_Capstone_Project\giftlink-backend\util\import-mongo> 
