@@ -6,7 +6,7 @@ const pinoLogger = require('./logger');
 
 const connectToDatabase = require('./models/db');
 const {loadData} = require("./util/import-mongo/index");
-
+// console.log(process.env.MONGO_URL, "is here ")
 
 const app = express();
 app.use("*",cors());
