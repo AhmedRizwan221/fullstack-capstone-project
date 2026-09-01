@@ -1,19 +1,56 @@
 import React, { useState } from 'react';
-
+import { urlConfig } from '../../config';
+import { useAppContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import './RegisterPage.css';
 
 function RegisterPage() {
-
     //insert code here to create useState hook variables for firstName, lastName, email, password
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showerr, setShowerr] = useState('');
+
+
+    const navigate = useNavigate();
+    const { setIsLoggedIn } = useAppContext();
+
 
     // insert code here to create handleRegister function and include console.log
-    const handleRegister = async (e) => {
-        e.preventDefault();
-        console.log("Register invoked")
+    const handleRegister = async () => {
+        try {
+            const response = await fetch(`${urlConfig.backendUrl}/api/auth/register`, {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    password: password
+                })
+            });
+            const json = await response.json();
+            console.log(json);
+
+            if (json.authtoken) {
+                sessionStorage.setItem('auth-token', json.authtoken);
+                sessionStorage.setItem('name', firstName);
+                sessionStorage.setItem('email', email);
+                setIsLoggedIn(true);
+
+                navigate('/app');
+            }
+
+            if (json.error) {
+                setShowerr(json.error);
+            }
+        } catch (error) {
+            console.error(error);
+            setShowerr(error);
+        }
     }
 
 
@@ -23,6 +60,7 @@ function RegisterPage() {
                 <div className="col-md-6 col-lg-4">
                     <div className="register-card p-4 border rounded">
                         <h2 className="text-center mb-4 font-weight-bold">Register</h2>
+                        <div className="text-danger">{showerr}</div>
 
                         {/* insert code here to create input elements for all the variables - firstName, lastName, email, password */}
                         <form onSubmit={handleRegister}>
@@ -40,39 +78,42 @@ function RegisterPage() {
                             </div>
                             <div className="mb-4">
 
-                                <label htmlFor="lastName" className="form label"> LastName</label><br>
-                                    <input
-                                        id="lastName"
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="Enter your lastName"
-                                        value={lastName}
-                                        onChange={(e) => setLastName(e.target.value)}
-                                    />
+                                <label htmlFor="lastName" className="form label"> LastName</label>
+                                <br></br>
+                                <input
+                                    id="lastName"
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Enter your lastName"
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                />
                             </div>
                             <div className="mb-4">
 
-                                <label htmlFor="email" className="form label"> Email</label><br>
-                                    <input
-                                        id="email"
-                                        type="email"
-                                        className="form-control"
-                                        placeholder="Enter your Email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                    />
+                                <label htmlFor="email" className="form label"> Email</label>
+                                <br></br>
+                                <input
+                                    id="email"
+                                    type="email"
+                                    className="form-control"
+                                    placeholder="Enter your Email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
                             </div>
                             <div className="mb-4">
 
-                                <label htmlFor="password" className="form label"> Password</label><br>
-                                    <input
-                                        id="password"
-                                        type="password"
-                                        className="form-control"
-                                        placeholder="Enter your password"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                    />
+                                <label htmlFor="password" className="form label"> Password</label>
+                                <br></br>
+                                <input
+                                    id="password"
+                                    type="password"
+                                    className="form-control"
+                                    placeholder="Enter your password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
                             </div>
 
                             <button className="btn btn-primary w-100 mb-3" type='submit'>Register</button>
@@ -89,8 +130,11 @@ function RegisterPage() {
                 </div>
             </div>
         </div>
+    )
 
-    )//end of return
 }
+
+
+
 
 export default RegisterPage;
