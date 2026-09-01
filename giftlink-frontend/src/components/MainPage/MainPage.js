@@ -6,15 +6,11 @@ function MainPage() {
     const [gifts, setGifts] = useState([]);
     const navigate = useNavigate();
 
-    // const urlConfig = {
-    //     backendUrl: import.meta.env.REACT_APP_BACKEND_URL || 'http://localhost:3060'
-    // };
-
     // fetch all gifts
     const fetchGifts = async () => {
         try {
             let url = `${urlConfig.backendUrl}/api/gifts`;
-            console.log(url,"url is here");
+            // console.log(url,"url is here");
             const response = await fetch(url);
             // console.log(response, "Response is here");
 
