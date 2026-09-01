@@ -66,7 +66,8 @@ function RegisterPage() {
                         <form onSubmit={handleRegister}>
                             <div className="mb-4">
 
-                                <label htmlFor="firstName" className="form label"> FirstName</label><br>
+                                <label htmlFor="firstName" className="form label"> FirstName</label>
+                                <br></br>
                                     <input
                                         id="firstName"
                                         type="text"
