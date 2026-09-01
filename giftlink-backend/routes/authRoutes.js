@@ -35,7 +35,7 @@ router.post('/register', async (req, res) => {
         // {{insert code here}}
         const existingEmail = await collection.findOne({ email: req.body.email });
         if (existingEmail) {
-            return  res.status(400).send("User with this email already exists");
+            return res.status(400).send("User with this email already exists");
         }
 
         const salt = await bcryptjs.genSalt(10);
@@ -64,6 +64,51 @@ router.post('/register', async (req, res) => {
         res.json({ authtoken, email });
     } catch (e) {
         return res.status(500).send('Internal server error');
+    }
+});
+
+router.post('/login', async (req, res) => {
+    try {
+        // Task 1: Connect to `giftsdb` in MongoDB through `connectToDatabase` in `db.js`.
+        const db = await connectToDatabase();
+
+        // Task 2: Access MongoDB `users` collection
+        const collection = db.collection('users');
+
+        // Task 3: Check for user credentials in database
+        const existingUser = await collection.findOne({ email: req.body.email });
+        if (!existingUser) {
+            return res.status(400).send('User with this email is not found');
+        }
+
+        // Task 4: Task 4: Check if the password matches the encrypyted password and send appropriate message on mismatch
+        if (existingUser) {
+            const result = await bcryptjs.compare(req.body.password, existingUser.password);
+            if (!result) {
+                logger.error('Password do not match');
+                return res.status(404).json({ error: 'Wrong pasword' });
+            }
+        }
+
+        // Task 5: Fetch user details from database
+        const userName = existingUser.firstName;
+        const userEmail = existingUser.email;
+
+        // Task 6: Create JWT authentication if passwords match with user._id as payload
+        let payload = {
+            user: {
+                id: existingUser._id.toString(),
+            },
+        };
+        jwt.sign(user._id, JWT_SECRET);
+        
+
+
+        res.json({ authtoken, userName, userEmail });
+        // Task 7: Send appropriate message if user not found
+    } catch (e) {
+        return res.status(500).send('Internal server error');
+
     }
 });
 
