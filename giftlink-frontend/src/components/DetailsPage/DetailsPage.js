@@ -23,7 +23,7 @@ function DetailsPage() {
             try {
                 // Task 2: Fetch gift details
                 const url = `${urlConfig.backendUrl}/api/gifts/${productId}`;
-                const response = fetch(url);
+                const response = await fetch(url);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -41,7 +41,7 @@ function DetailsPage() {
         // Task 3: Scroll to top on component mount
         // {{ insert code here }}
         window.scrollTo(0, 0)
-    }, [productId]);
+    }, [productId, navigate]);
 
 
     const handleBackClick = () => {
