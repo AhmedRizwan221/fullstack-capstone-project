@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { body, validationResult } = require('express-validator');
 const connectToDatabase = require('../models/db');
 const router = express.Router();
 const dotenv = require('dotenv');
@@ -50,7 +49,7 @@ router.post('/register', async (req, res) => {
             lastName: req.body.lastName,
             password: hash,
             createdAt: new Date(),
-        })
+        });
         // {{insert code here}} //Task 5: Create JWT authentication with user._id as payload
         const payload = {
             user: {
