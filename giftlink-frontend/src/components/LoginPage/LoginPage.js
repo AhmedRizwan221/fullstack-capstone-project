@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './LoginPage.css';
 import { urlConfig } from '../../config';
 import { useAppContext } from '../../context/AuthContext';
@@ -40,12 +40,12 @@ function LoginPage() {
                     password: password,
                 })
             });
-
-
+            // here i add this line now 
+            const json = await response.json();
 
             if (json.authtoken) {
                 // Tasks 1-4 done previously
-                const json = await res.json();
+                // const json = await res.json();
                 sessionStorage.setItem('auth-token', json.authtoken);
                 sessionStorage.setItem('name', json.userName);
                 sessionStorage.setItem('email', json.userEmail);
