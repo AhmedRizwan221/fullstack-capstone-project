@@ -1,0 +1,49 @@
+
+Module 5 Introduction: CI/CD, Containerize, and Deploy
+Estimated time needed: 5 minutes
+
+In the final module for the project, you will implement a CI/CD best practice by using GitHub Actions to provide some automation when pushing your code to your repository. In the second lab, you containerize and deploy the application. Let's look at these two labs in a little further detail.
+
+CI/CD with GitHub Actions Lab
+In this lab, you will implement Continuous Integration (CI) and Continuous Deployment (CD) in your project by adding linting to the code repository on GitHub through GitHub Actions. The CI/CD pipeline will automatically run when you push the code into the main branch.
+
+In this lab, you set up GitHub Actions to validate the code for syntax errors and coding style compliance to maintain code quality and facilitate smoother deployments.
+
+By setting up these Actions, you will set up a new workflow using a provided template. You will define a GitHub Action template, which will contain two jobs.
+
+lint_js – This will lint all the JavaScript files inside the folder. You will be given the list of files you should lint as part of the template. You may add additional files as needed.
+
+client_build – This workflow builds the client side to ensure there are no errors.
+
+When you commit the main.yml workflow configuration file for the first time, you trigger the workflow. You will inspect logs and resolve errors to ensure that this GitHub Actions workflow runs successfully.
+
+Tasks in this lab include:
+
+Enable GitHub Actions
+Setup a workflow
+Add the provided lint code to the main.yml file
+View the logs for each job
+Resolve linking errors
+Containerize and Deploy Application Lab
+As explained in the project overview, the GiftLink web application uses a microservices architecture. In this lab, you will set up and deploy these microservices on Kubernetes and IBM Cloud Code Engine.
+
+Prerequisites:
+Complete all the front-end and back-end coding.
+Integrate the front end and back end.
+Test all use case scenarios.
+Push the code to your GitHub repository.
+This lab has three main parts:
+
+Containerize and deploy MongoDB on Kubernetes
+Containerize and deploy the back-end service on Kubernetes
+Containerize and deploy the front-end service on IBM Code Engine
+The tasks, at a high level, involve:
+
+Pull code from the repository
+Deploy MongoDB on Kubernetes
+Configuring environment files for the back end to point to the MongoDB deployed on Kubernetes
+Containerize and deploying the back end on Kubernetes
+Configure environment files for the front end to point to the back end deployed on Kubernetes
+Build, containerize, and deploy the front end on IBM Cloud Code Engine
+Ensure a functional system
+During the course of the lab, you will take screenshots of code, code output, or the rendered front end to provide proof of work to submitted for your peer review evaluation.
